@@ -1,0 +1,53 @@
+{% extends "base.html" %} {% block content %} {% load static %}
+<section class="content">
+  <section class="posts_form">
+    <form action="/" method="POST">
+      {% csrf_token %}
+      <input type="text" name="name js-menu-icon" name placeholder="Name" />
+      <textarea
+        name="body"
+        placeholder=" Tell us anything "
+        required
+      ></textarea>
+      <input type="Submit" value="post" />
+    </form>
+    <section class="posts">
+      <ul>
+        {% for post in posts %}
+        <li>
+          <div class="logo">
+            <img width="30px" src="{% static 'img/icons8-user-94.png' %}" />
+          </div>
+
+          <div>
+            <div>{{ post.name }}</div>
+            <br />
+            <div>{{ post.created_at }}</div>
+            <br />
+            <div>{{datatime}}</div>
+            <div class="name_body">
+              <p>{{post.body}}</p>
+              <img
+                class="menu_icon js-menu-icon"
+                width="30px"
+                src="{% static 'img/menu.png' %}"
+              />
+              <div class="menu">
+                <a href="/delete/{{post.id }}/">delete</a>
+              </div>
+            </div>
+          </div>
+        </li>
+
+        {% endfor %}
+      </ul>
+    </section>
+    <script
+      src="https://code.jquery.com/jquery-3.6.0.js"
+      integrity="sha256-H+K7U5CnXl1h5ywQfKtSj8PCmoN9aaq30gDh27Xc0jk="
+      crossorigin="anonymous"
+    ></script>
+    <script src="{% static 'js/posts.js' %}"></script>
+    {% endblock %}
+  </section>
+</section>
